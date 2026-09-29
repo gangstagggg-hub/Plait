@@ -1,4 +1,4 @@
-const CACHE = 'plait-v10';
+const CACHE = 'klar-v11';
 const ASSETS = ['./', './index.html', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 
 self.addEventListener('install', e => {

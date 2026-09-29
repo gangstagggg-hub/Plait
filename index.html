@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#edebe6">
 <meta name="mobile-web-app-capable" content="yes">
-<title>Plait</title>
+<title>Klar</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,12 +50,10 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .top{display:flex;align-items:flex-end;justify-content:space-between;margin:8px 2px 12px}
 h1{font-family:var(--ff-read);font-weight:600;font-size:36px;line-height:1.1;letter-spacing:-.015em}
 .logo{position:relative;display:inline-block;font-family:'Syne','Arial Black',system-ui,sans-serif;font-weight:800;text-transform:uppercase;font-size:34px;line-height:1;letter-spacing:.02em;color:var(--text);padding-bottom:.42em}
-.lg-pencil{position:absolute;left:-1.5%;bottom:-.09em;width:103%;height:.62em;overflow:visible;color:var(--text)}
+.lg-pencil{position:absolute;left:-1.5%;bottom:-.02em;width:103%;height:.34em;overflow:visible;color:var(--text)}
 .lg-pencil path{fill:none;stroke:currentColor;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.lg-pencil .lg-s1{stroke-width:4.4px;opacity:.94;animation:pencil1 .34s linear .12s backwards}
-.lg-pencil .lg-s2{stroke-width:3.4px;opacity:.82;animation:pencil2 .3s linear .32s backwards}
+.lg-pencil .lg-s1{stroke-width:2.4px;opacity:.9;animation:pencil1 .34s linear .12s backwards}
 @keyframes pencil1{from{clip-path:inset(-40% 100% -40% 0)}to{clip-path:inset(-40% -5% -40% -5%)}}
-@keyframes pencil2{from{clip-path:inset(-40% 100% -40% 0)}to{clip-path:inset(-40% -5% -40% -5%)}}
 .count{color:var(--muted);font-size:14px;margin-top:4px}
 .icon-btn{width:44px;height:44px;border-radius:50%;border:0;background:transparent;display:grid;place-items:center}
 .icon-btn:active{background:var(--surface-2)}
@@ -329,7 +327,7 @@ body:has(#sheet:not([hidden])) .toast{bottom:auto;top:calc(env(safe-area-inset-t
   <section id="home">
     <header class="top">
       <div>
-        <h1 class="logo" aria-label="Plait"><span aria-hidden="true">PLAIT</span><svg class="lg-pencil" viewBox="0 0 220 26" preserveAspectRatio="none" aria-hidden="true">
+        <h1 class="logo" aria-label="Klar"><span aria-hidden="true">KLAR</span><svg class="lg-pencil" viewBox="0 0 220 14" preserveAspectRatio="none" aria-hidden="true">
   <defs>
     <filter id="pgrain1" x="-10%" y="-400%" width="120%" height="900%">
       <feTurbulence type="fractalNoise" baseFrequency="0.55 1.4" numOctaves="3" seed="7" result="n"/>
@@ -337,15 +335,8 @@ body:has(#sheet:not([hidden])) .toast{bottom:auto;top:calc(env(safe-area-inset-t
       <feComponentTransfer in="g1" result="grain"><feFuncA type="linear" slope="2.6" intercept="-0.35"/></feComponentTransfer>
       <feComposite in="SourceGraphic" in2="grain" operator="in"/>
     </filter>
-    <filter id="pgrain2" x="-10%" y="-400%" width="120%" height="900%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.6 1.5" numOctaves="3" seed="23" result="n"/>
-      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 -0.15" result="g1"/>
-      <feComponentTransfer in="g1" result="grain"><feFuncA type="linear" slope="2.6" intercept="-0.35"/></feComponentTransfer>
-      <feComposite in="SourceGraphic" in2="grain" operator="in"/>
-    </filter>
   </defs>
-  <path class="lg-s1" d="M4 8 C 60 6.6, 150 9.2, 215 7.4" filter="url(#pgrain1)"/>
-  <path class="lg-s2" d="M20 16.4 C 70 15.3, 130 17.6, 200 15.8" filter="url(#pgrain2)"/>
+  <path class="lg-s1" d="M4 7 C 60 5.6, 150 8.2, 215 6.4" filter="url(#pgrain1)"/>
 </svg></h1>
         <div class="count" id="count"></div>
       </div>
@@ -2268,7 +2259,7 @@ async function exportData(){
   const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `plait-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = `klar-backup-${new Date().toISOString().slice(0, 10)}.json`;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   toast('Backup lastet ned');
@@ -2301,7 +2292,7 @@ $('#importInput').addEventListener('change', async e => {
     }
     save(); refresh();
     toast(added ? `Hentet inn ${added} ${added === 1 ? 'element' : 'elementer'}` : 'Alt fantes fra før');
-  } catch(err) { toast('Filen er ikke en gyldig backup fra Plait'); }
+  } catch(err) { toast('Filen er ikke en gyldig backup fra Klar'); }
 });
 
 /* ---------- Kalender ---------- */
@@ -2782,9 +2773,9 @@ async function buildPDF(root, blocksFor, withSubs, withData){
   const N = doc.getNumberOfPages();
   for (let i = 1; i <= N; i++) {
     doc.setPage(i); font(false, 8); muted();
-    doc.text('Plait', M, H - 28); doc.text(`${i} / ${N}`, W - M, H - 28, { align:'right' });
+    doc.text('Klar', M, H - 28); doc.text(`${i} / ${N}`, W - M, H - 28, { align:'right' });
   }
-  doc.setProperties({ title: pdfSafe(root.title.trim() || 'Side'), creator:'Plait' });
+  doc.setProperties({ title: pdfSafe(root.title.trim() || 'Side'), creator:'Klar' });
   return doc.output('blob');
 }
 
